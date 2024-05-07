@@ -1,0 +1,36 @@
+{
+  "name": "namastereact",
+  "version": "1.0.0",
+  "description": "This is a namaste react course",
+ 
+  "scripts": {
+    "start": "npx parcel index.html",
+    "build": "npx parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VinodNare45/namaste-react.git"
+  },
+  "keywords": [
+    "namaste",
+    "react"
+  ],
+  "author": "Vinod Kumar Reddy Nare",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VinodNare45/namaste-react/issues"
+  },
+  "homepage": "https://github.com/VinodNare45/namaste-react#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserlist" : [
+    "last 2 versions"
+  ]
+}
