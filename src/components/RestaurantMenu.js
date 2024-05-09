@@ -1,15 +1,20 @@
 import { useEffect,useState } from "react";
 import Shimmer from "./Shimmer";
+import { useParams } from "react-router-dom";
+import { Menu_LINK } from "../utils/constants";
 
 const RestaurantMenu = () =>{
 
     const [resItems, setResItems] = useState(null);
+
+    const {resId} = useParams();
+    
     useEffect(()=>{
         fetchMenu();
     },[])
 
     const fetchMenu = async ()=>{
-        const data = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=13.6287557&lng=79.4191795&restaurantId=80107&catalog_qa=undefined&isMenuUx4=true&submitAction=ENTER");
+        const data = await fetch(Menu_LINK + resId);
 
         const json = await data.json();
         console.log(json);
@@ -18,15 +23,29 @@ const RestaurantMenu = () =>{
     
     if(resItems === null) return <Shimmer />
 
-    const {restaurantData} = resItems.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    const {name, cuisines, costForTwoMessage} = resItems?.cards[2]?.card?.card?.info;
+
+    const {categories} = resItems?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
+
+    const {itemCards} = resItems?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
+
      
     return (
         <div>
-            <h1>{restaurantData[0].info.name}</h1>
-            <h3>{restaurantData[0].info.cuisines} - {restaurantData[0].info.costForTwo}</h3>
+            <h1>{name}</h1>
+            <h3>{cuisines.join(", ")} - {costForTwoMessage}</h3>
             <h2>Menu</h2>
             <ul>
-                <li>items</li>
+                {categories? categories[0].itemCards?.map((item)=>{
+                    return(
+                    <li key={item.card.info.id}>{item.card.info.name} - Rs {item.card.info.price/100}</li>
+
+                )}):itemCards?.map((item)=>{
+                    return(
+                    <li key={item.card.info.id}>{item.card.info.name} - Rs {item.card.info.price/100}</li>
+
+                )})}
+                
             </ul>
         </div>
     )
