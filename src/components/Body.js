@@ -38,14 +38,14 @@ const Body = () => {
   ) : (
     <div className="body">
       <div className="filter">
-        <div className="search">
-          <input
+        <div className="search flex rounded-lg">
+          <input className="border border-solid border-black px-4 m-4"
             type="text"
             placeholder="Search Restaurants"
             onChange={(e) => setSearchInput(e.target.value)}
             value={searchInput}
           />
-          <button
+          <button className="px-4 py-1 m-4 bg-green-100 rounded-lg"
             onClick={() => {
               setFilteredRestaurants(
                 listOfRestaurants.filter((rest) =>
@@ -58,7 +58,7 @@ const Body = () => {
           >
             Search
           </button>
-          <div className="filter-btn">
+          <div className="flex px-4 py-1 m-4 bg-blue-100 rounded-lg">
             <button
               onClick={() => {
                 setListOfRestaurants(
@@ -72,7 +72,7 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => (
           <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}><RestaurantContainer  resData={restaurant} /></Link>
         ))}

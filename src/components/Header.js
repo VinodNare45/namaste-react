@@ -9,23 +9,23 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   return (
-    <div className="header">
-      <img className="logo" src={LOGO_LINK} />
-      <div className="nav-items">
-        <ul>
-          <li>
+    <div className="flex justify-between items-center bg-red-100 shadow-lg" >
+      <img className="w-40" src={LOGO_LINK} />
+      <div >
+        <ul className="flex p-4 m-4 items-center">
+          <li className="p-4">
             Online Status: {onlineStatus? "✅":"⭕"}
           </li>
-          <li>
+          <li className="p-4">
             <Link to="/">Home</Link></li>
-          <li>
+          <li className="p-4">
           <Link to="/about">About Us</Link></li>
-          <li><Link to="/contact">Contact Us</Link></li>
-          <li><Link to="/grocery">Grocery</Link></li>
+          <li className="p-4"><Link to="/contact">Contact Us</Link></li>
+          <li className="p-4"><Link to="/grocery">Grocery</Link></li>
           
-          <li>Cart</li>
+          <li className="p-4">Cart</li>
           <button
-            className="login-btn"
+            className="p-4"
             onClick={() => setIsLoggedIn(!isLoggedIn)}
           >
             {isLoggedIn ? "Logout" : "Login"}
