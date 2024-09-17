@@ -21,4 +21,17 @@ const RestaurantContainer = (props) => {
   );
 };
 
+
+
+export const promotedRestaurant = (RestaurantContainer) => {
+  return (props) =>{
+    return (
+        <div>
+          <label className="absolute bg-black text-white p-2 m-2 rounded-lg">Promoted</label>
+          <RestaurantContainer {...props}/>
+        </div>
+    )
+  }
+}
+
 export default RestaurantContainer;

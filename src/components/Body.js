@@ -1,4 +1,4 @@
-import RestaurantContainer from "./RestaurantContainer";
+import RestaurantContainer,{promotedRestaurant} from "./RestaurantContainer";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ const Body = () => {
   const [searchInput, setSearchInput] = useState("");
 
 
+console.log(listOfRestaurants);
 
   useEffect(() => {
     fetchData();
@@ -30,6 +31,10 @@ const Body = () => {
   };
 
   const onlineStatus = useOnlineStatus();
+  
+  const RestaurantPromoted = promotedRestaurant(RestaurantContainer);
+
+
 
   if(onlineStatus === false) return (<h1>Looks like you are offline!! Please check your network connection!</h1>);
 
@@ -74,7 +79,9 @@ const Body = () => {
 
       <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => (
-          <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}><RestaurantContainer  resData={restaurant} /></Link>
+          <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
+            {restaurant.info.promoted?<RestaurantPromoted resData= {restaurant}/>:( <RestaurantContainer  resData={restaurant}/>)}
+            </Link>
         ))}
       </div>
     </div>
